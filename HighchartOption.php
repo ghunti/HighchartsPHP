@@ -1,9 +1,9 @@
 <?php
 
-class HighChartOption implements ArrayAccess
+class HighchartOption implements ArrayAccess
 {
     /**
-     * An array of HighChartOptions
+     * An array of HighchartOptions
      *
      * @var array
      */
