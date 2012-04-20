@@ -2,8 +2,33 @@
 
 include_once "HighchartOption.php";
 
-class Highchart implements ArrayAccess {
+class Highchart implements ArrayAccess
+{
+    //The chart type.
+    //A regullar higchart
+    const HIGHCHART = 0;
+    //A highstock chart
+    const HIGHSTOCK = 1;
+
+    /**
+     * The chart options
+     *
+     * @var array
+     */
     private $_options = array();
+
+    /**
+     * The chart type.
+     * Either self::HIGHCHART or self::HIGHSTOCK
+     *
+     * @var int
+     */
+    private $_chartType;
+
+    public function __construct($chartType = self::HIGHCHART)
+    {
+        $this->_chartType = $chartType;
+    }
 
     public function offsetSet($offset, $value)
     {
@@ -36,5 +61,32 @@ class Highchart implements ArrayAccess {
         }
         //TODO: Check for encoding errors
         return json_encode($options);
+    }
+
+    /**
+     * Render the chart and returns the javascript that
+     * must be printed to the page to create the chart
+     *
+     * @param string $varName The javascript chart variable name
+     *
+     * @return string The javascript code
+     */
+    public function render($varName = null)
+    {
+        $result = '';
+        if (!is_null($varName)) {
+            $result = "$varName = ";
+        }
+
+        $result .= 'new Highcharts.';
+        if ($this->_chartType === self::HIGHCHART) {
+            $result .= 'Chart(';
+        } else {
+            $result .= 'StockChart(';
+        }
+
+        $result .= $this->renderOptions();
+        $result .= ');';
+        return $result;
     }
 }
