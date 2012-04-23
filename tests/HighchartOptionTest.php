@@ -12,19 +12,31 @@ class HighchartOptionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("A", $options['a']->getValue());
         $this->assertEquals(array('a' => "A"), $options->getValue());
 
+        $options->b = "B";
+        $this->assertEquals("B", $options->b->getValue());
+        $this->assertEquals(array('a' => "A", 'b' => "B"), $options->getValue());
+
         $options['a']['b'] = "AB";
         $this->assertEquals("AB", $options['a']['b']->getValue());
         $this->assertEquals(array('b' => "AB"), $options['a']->getValue());
-        $this->assertEquals(array('a' => array('b' => "AB")), $options->getValue());
+        $this->assertEquals(array('a' => array('b' => "AB"), 'b' => "B"), $options->getValue());
 
         $options['a'] = "A";
         $this->assertEquals("A", $options['a']->getValue());
-        $this->assertEquals(array('a' => "A"), $options->getValue());
+        $this->assertEquals(array('a' => "A", 'b' => "B"), $options->getValue());
         //--Consecutive creation
 
         //Non-consecutive creation
         $options = new HighchartOption();
         $options['a']['b']['c'] = "ABC";
+        $this->assertEquals(array(
+                            'a' => array(
+                                'b' => array(
+                                    'c' => "ABC"))),
+                            $options->getValue());
+
+        $options = new HighchartOption();
+        $options->a->b->c = "ABC";
         $this->assertEquals(array(
                             'a' => array(
                                 'b' => array(
@@ -38,10 +50,11 @@ class HighchartOptionTest extends PHPUnit_Framework_TestCase
         $options[] = "1";
         $options['a'][] = "A1";
         $options['a'][] = "A2";
+        $options->a[] = "A3";
         $this->assertEquals(array(
                              0  => "0",
                              1  => "1",
-                            'a' => array("A1", "A2")),
+                            'a' => array("A1", "A2", "A3")),
                             $options->getValue());
         //--Non associative arrays
 
@@ -50,11 +63,17 @@ class HighchartOptionTest extends PHPUnit_Framework_TestCase
         $options['a'] = array("A0", "A1");
         $options['b'] = array('a' => "BA", 'b' => "BB");
         $options['c'] = array('a' => "CA", "C0");
+        $options->d = array("D0", "D1");
+        $options->e = array('a' => "EA", 'b' => "EB");
+        $options->f = array('a' => "FA", "F0");
 
         $this->assertEquals(array(
                             'a' => array("A0", "A1"),
                             'b' => array('a' => "BA", 'b' => "BB"),
-                            'c' => array('a' => "CA", "C0")),
+                            'c' => array('a' => "CA", "C0"),
+                            'd' => array("D0", "D1"),
+                            'e' => array('a' => "EA", 'b' => "EB"),
+                            'f' => array('a' => "FA", "F0")),
                             $options->getValue());
         //--One-dimensional arrays as values
 
@@ -66,6 +85,12 @@ class HighchartOptionTest extends PHPUnit_Framework_TestCase
                               'b' => array('a' => "ABA", 'b' => "ABB"),
                               "2",
                               'c' => "C");
+        $options->b = array(array("B00", "B01"),
+                              'a' => array("BA0", "BA1"),
+                              array('a' => "B1A", 'b' => "B1B"),
+                              'b' => array('a' => "BBA", 'b' => "BBB"),
+                              "2",
+                              'c' => "C");
 
         $this->assertEquals(array(
                             'a' => array(
@@ -74,9 +99,27 @@ class HighchartOptionTest extends PHPUnit_Framework_TestCase
                                  2  => "2",
                                 'a' => array("AA0", "AA1"),
                                 'b' => array('a' => "ABA", 'b' => "ABB"),
+                                'c' => "C"),
+                            'b' => array(
+                                 0  => array("B00", "B01"),
+                                 1  => array('a' => "B1A", 'b' => "B1B"),
+                                 2  => "2",
+                                'a' => array("BA0", "BA1"),
+                                'b' => array('a' => "BBA", 'b' => "BBB"),
                                 'c' => "C")),
                             $options->getValue());
         //--Multi-dimensional arrays as values
+
+        //Array and object access
+        $options = new HighchartOption();
+        $options['a']->b['c'][] = "ABC0";
+        $options->a['b']->c[] = "ABC1";
+        $this->assertEquals(array(
+                            'a' => array(
+                                'b' => array(
+                                    'c' => array("ABC0", "ABC1")))),
+                            $options->getValue());
+        //--Array and object access
     }
 }
 ?>

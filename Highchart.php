@@ -31,6 +31,16 @@ class Highchart implements ArrayAccess
         $this->_chartType = $chartType;
     }
 
+    public function __set($offset, $value)
+    {
+        $this->offsetSet($offset, $value);
+    }
+
+    public function __get($offset)
+    {
+        return $this->offsetGet($offset);
+    }
+
     public function offsetSet($offset, $value)
     {
         $this->_options[$offset] = new HighchartOption($value);
