@@ -11,6 +11,11 @@ class Highchart implements ArrayAccess
     //A highstock chart
     const HIGHSTOCK = 1;
 
+    //The js engine to use
+    const ENGINE_JQUERY = 10;
+    const ENGINE_MOOTOOLS = 11;
+    const ENGINE_PROTOTYPE = 12;
+
     /**
      * The chart options
      *
@@ -26,9 +31,18 @@ class Highchart implements ArrayAccess
      */
     private $_chartType;
 
-    public function __construct($chartType = self::HIGHCHART)
+    /**
+     * The javascript library to use.
+     * One of ENGINE_JQUERY, ENGINE_MOOTOOLS or ENGINE_PROTOTYPE
+     *
+     * @var int
+     */
+    private $_jsEngine;
+
+    public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY)
     {
         $this->_chartType = $chartType;
+        $this->_jsEngine = $jsEngine;
     }
 
     public function __set($offset, $value)
@@ -139,5 +153,55 @@ class Highchart implements ArrayAccess
         $result .= $this->renderOptions();
         $result .= ');';
         return $result;
+    }
+
+    /**
+     * Finds the javascript files that need to be included on the page, based
+     * on the chart type and js engine.
+     * Uses the conf.php file to build the files path
+     *
+     * @return array The javascript files path
+     */
+    public function getScripts()
+    {
+        include_once "conf.php";
+
+        $scripts = array();
+        switch ($this->_jsEngine) {
+            case self::ENGINE_JQUERY:
+                $scripts[] = $jsFiles['jQuery']['path'] . $jsFiles['jQuery']['name'];
+                break;
+
+            case self::ENGINE_MOOTOOLS:
+                $scripts[] = $jsFiles['mootools']['path'] . $jsFiles['mootools']['name'];
+                if ($this->_chartType === self::HIGHCHART) {
+                    $scripts[] = $jsFiles['highchartsMootoolsAdapter']['path'] . $jsFiles['highchartsMootoolsAdapter']['name'];
+                } else {
+                    $scripts[] = $jsFiles['highstockMootoolsAdapter']['path'] . $jsFiles['highstockMootoolsAdapter']['name'];
+                }
+                break;
+
+            case self::ENGINE_PROTOTYPE:
+                $scripts[] = $jsFiles['prototype']['path'] . $jsFiles['prototype']['name'];
+                if ($this->_chartType === self::HIGHCHART) {
+                    $scripts[] = $jsFiles['highchartsPrototypeAdapter']['path'] . $jsFiles['highchartsPrototypeAdapter']['name'];
+                } else {
+                    $scripts[] = $jsFiles['highstockPrototypeAdapter']['path'] . $jsFiles['highstockPrototypeAdapter']['name'];
+                }
+                break;
+
+        }
+
+        switch ($this->_chartType) {
+            case self::HIGHCHART:
+                $scripts[] = $jsFiles['highcharts']['path'] . $jsFiles['highcharts']['name'];
+                break;
+
+            case self::HIGHSTOCK:
+                $scripts[] = $jsFiles['highstock']['path'] . $jsFiles['highstock']['name'];
+                break;
+        }
+
+        return $scripts;
     }
 }
