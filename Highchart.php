@@ -204,4 +204,21 @@ class Highchart implements ArrayAccess
 
         return $scripts;
     }
+
+    /**
+     * Global options that don't apply to each chart like lang and global
+     * must be set using the Highcharts.setOptions javascript method.
+     * This method receives a set og HighchartOption and returns the
+     * javascript string needed to set those options globally
+     *
+     * @param HighchartOption The options to create
+     *
+     * @return string The javascript needed to set the global options
+     */
+    public static function setOptions($options)
+    {
+        //TODO: Check encoding errors
+        $option = json_encode($options->getValue());
+        return "Highcharts.setOptions($option);";
+    }
 }
