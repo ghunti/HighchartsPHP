@@ -36,6 +36,26 @@ $rightYaxis->labels->formatter = new HighchartJsExpr("function() { return Highch
 $rightYaxis->showFirstLabel = false;
 $chart->yAxis[] = $rightYaxis;
 
+// The yAxis can also be an array of non-associative arrays
+
+/*$chart->yAxis = array(array('title' => array('text' => null),
+                            'labels' => array('align' => 'left',
+                                              'x' => 3,
+                                              'y' => 16,
+                                              'formatter' => new HighchartJsExpr("function() { return Highcharts.numberFormat(this.value, 0);}")),
+                            'showFirstLabel' => false),
+                      array('linkedTo' => 0,
+                            'gridLineWidth' => 0,
+                            'opposite' => true,
+                            'title' => array('text' => null),
+                            'labels' => array('align' => 'right',
+                                              'x' => -3,
+                                              'y' => 16,
+                                              'formatter' => new HighchartJsExpr("function() { return Highcharts.numberFormat(this.value, 0);}"))
+                            ));*/
+
+
+
 $chart->legend = array('align' => 'left', 'verticalAlign' => 'top',
                        'y' => 20, 'floating' => true,
                        'borderWidth' => 0);
