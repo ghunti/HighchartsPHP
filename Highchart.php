@@ -133,10 +133,12 @@ class Highchart implements ArrayAccess
      * must be printed to the page to create the chart
      *
      * @param string $varName The javascript chart variable name
+     * @param string $callback The function callback to pass
+     *                         to the Highcharts.Chart method
      *
      * @return string The javascript code
      */
-    public function render($varName = null)
+    public function render($varName = null, $callback = null)
     {
         $result = '';
         if (!is_null($varName)) {
@@ -151,6 +153,7 @@ class Highchart implements ArrayAccess
         }
 
         $result .= $this->renderOptions();
+        $result .= is_null($callback) ? '' : ", $callback";
         $result .= ');';
         return $result;
     }
