@@ -107,19 +107,20 @@ class Highchart implements ArrayAccess
      */
     private static function _replaceJsExpr($data, &$jsExpressions)
     {
-        if ($data instanceof HighchartJsExpr) {
-            $magicKey = "____" . count($jsExpressions) . "_" . count($jsExpressions);
-            $jsExpressions[$magicKey] = $data->getExpression();
-            return $magicKey;
-        }
-
         if (!is_array($data) &&
             !is_object($data)) {
             return $data;
         }
 
-        if (is_object($data)) {
+        if (is_object($data) &&
+            !$data instanceof HighchartJsExpr) {
             $data = $data->getValue();
+        }
+
+        if ($data instanceof HighchartJsExpr) {
+            $magicKey = "____" . count($jsExpressions) . "_" . count($jsExpressions);
+            $jsExpressions[$magicKey] = $data->getExpression();
+            return $magicKey;
         }
 
         foreach ($data as $key => $value) {
