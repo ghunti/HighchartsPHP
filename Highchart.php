@@ -39,45 +39,25 @@ class Highchart implements ArrayAccess
      */
     private $_jsEngine;
 
+    /**
+     * The Highchart constructor
+     *
+     * @param int $chartType The chart type (Either self::HIGHCHART or self::HIGHSTOCK)
+     * @param int $jsEngine  The javascript library to use
+     *                       (One of ENGINE_JQUERY, ENGINE_MOOTOOLS or ENGINE_PROTOTYPE)
+     */
     public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY)
     {
         $this->_chartType = $chartType;
         $this->_jsEngine = $jsEngine;
     }
 
-    public function __set($offset, $value)
-    {
-        $this->offsetSet($offset, $value);
-    }
-
-    public function __get($offset)
-    {
-        return $this->offsetGet($offset);
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        $this->_options[$offset] = new HighchartOption($value);
-    }
-
-    public function offsetExists($offset)
-    {
-        return isset($this->_options[$offset]);
-    }
-
-    public function offsetUnset($offset)
-    {
-        unset($this->_options[$offset]);
-    }
-
-    public function offsetGet($offset)
-    {
-        if (!isset($this->_options[$offset])) {
-            $this->_options[$offset] = new HighchartOption();
-        }
-        return $this->_options[$offset];
-    }
-
+    /**
+     * Render the chart options and returns the javascript that
+     * represents them
+     *
+     * @return string The javascript code
+     */
     public function renderOptions()
     {
         $jsExpressions = array();
@@ -93,40 +73,6 @@ class Highchart implements ArrayAccess
             $result = str_replace('"' . $key . '"', $expr, $result);
         }
         return $result;
-    }
-
-    /**
-     * Replaces any HighchartJsExpr for an id, and save the
-     * js expression on the jsExpressions array
-     * Based on Zend_Json
-     *
-     * @param mixed $data           The data to analyze
-     * @param array &$jsExpressions The array that will hold
-     *                              information about the replaced
-     *                              js expressions
-     */
-    private static function _replaceJsExpr($data, &$jsExpressions)
-    {
-        if (!is_array($data) &&
-            !is_object($data)) {
-            return $data;
-        }
-
-        if (is_object($data) &&
-            !$data instanceof HighchartJsExpr) {
-            $data = $data->getValue();
-        }
-
-        if ($data instanceof HighchartJsExpr) {
-            $magicKey = "____" . count($jsExpressions) . "_" . count($jsExpressions);
-            $jsExpressions[$magicKey] = $data->getExpression();
-            return $magicKey;
-        }
-
-        foreach ($data as $key => $value) {
-            $data[$key] = self::_replaceJsExpr($value, $jsExpressions);
-        }
-        return $data;
     }
 
     /**
@@ -224,5 +170,72 @@ class Highchart implements ArrayAccess
         //TODO: Check encoding errors
         $option = json_encode($options->getValue());
         return "Highcharts.setOptions($option);";
+    }
+
+    public function __set($offset, $value)
+    {
+        $this->offsetSet($offset, $value);
+    }
+
+    public function __get($offset)
+    {
+        return $this->offsetGet($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        $this->_options[$offset] = new HighchartOption($value);
+    }
+
+    public function offsetExists($offset)
+    {
+        return isset($this->_options[$offset]);
+    }
+
+    public function offsetUnset($offset)
+    {
+        unset($this->_options[$offset]);
+    }
+
+    public function offsetGet($offset)
+    {
+        if (!isset($this->_options[$offset])) {
+            $this->_options[$offset] = new HighchartOption();
+        }
+        return $this->_options[$offset];
+    }
+
+    /**
+     * Replaces any HighchartJsExpr for an id, and save the
+     * js expression on the jsExpressions array
+     * Based on Zend_Json
+     *
+     * @param mixed $data           The data to analyze
+     * @param array &$jsExpressions The array that will hold
+     *                              information about the replaced
+     *                              js expressions
+     */
+    private static function _replaceJsExpr($data, &$jsExpressions)
+    {
+        if (!is_array($data) &&
+            !is_object($data)) {
+            return $data;
+        }
+
+        if (is_object($data) &&
+            !$data instanceof HighchartJsExpr) {
+            $data = $data->getValue();
+        }
+
+        if ($data instanceof HighchartJsExpr) {
+            $magicKey = "____" . count($jsExpressions) . "_" . count($jsExpressions);
+            $jsExpressions[$magicKey] = $data->getExpression();
+            return $magicKey;
+        }
+
+        foreach ($data as $key => $value) {
+            $data[$key] = self::_replaceJsExpr($value, $jsExpressions);
+        }
+        return $data;
     }
 }

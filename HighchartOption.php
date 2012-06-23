@@ -16,6 +16,11 @@ class HighchartOption implements ArrayAccess
      */
     private $_value;
 
+    /**
+     * The HighchartOption constructor
+     *
+     * @param mixed $value The option value
+     */
     public function __construct($value = null)
     {
         if (!is_array($value)) {
@@ -25,6 +30,27 @@ class HighchartOption implements ArrayAccess
                 $this->offsetSet($key, $val);
             }
         }
+    }
+
+    /**
+     * Returns the value of the current option
+     *
+     * @return mixed The option value
+     */
+    public function getValue()
+    {
+        if (isset($this->_value)) {
+            //This is a final option
+            return $this->_value;
+        } elseif (!empty($this->_childs)) {
+            //The option value is an array
+            $result = array();
+            foreach ($this->_childs as $key => $value) {
+                $result[$key] = $value->getValue();
+            }
+            return $result;
+        }
+        return null;
     }
 
     public function __set($offset, $value)
@@ -73,26 +99,5 @@ class HighchartOption implements ArrayAccess
             $this->_childs[$offset] = new self();
         }
         return $this->_childs[$offset];
-    }
-
-    /**
-     * Returns the value of the current option
-     *
-     * @return mixed The option value
-     */
-    public function getValue()
-    {
-        if (isset($this->_value)) {
-            //This is a final option
-            return $this->_value;
-        } elseif (!empty($this->_childs)) {
-            //The option value is an array
-            $result = array();
-            foreach ($this->_childs as $key => $value) {
-                $result[$key] = $value->getValue();
-            }
-            return $result;
-        }
-        return null;
     }
 }
