@@ -48,8 +48,8 @@ class Highchart implements ArrayAccess
      */
     public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY)
     {
-        $this->_chartType = $chartType;
-        $this->_jsEngine = $jsEngine;
+        $this->_chartType = is_null($chartType) ? self::HIGHCHART : $chartType;
+        $this->_jsEngine = is_null($jsEngine) ? self::ENGINE_JQUERY : $jsEngine;
     }
 
     /**
