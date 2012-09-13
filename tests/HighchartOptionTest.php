@@ -1,5 +1,13 @@
 <?php
-
+/**
+*
+* Copyright 2012-2012 Portugalmail Comunicações S.A (http://www.portugalmail.net/)
+*
+* See the enclosed file LICENCE for license information (GPLv3). If you
+* did not receive this file, see http://www.gnu.org/licenses/gpl-3.0.html.
+*
+* @author Gonçalo Queirós <mail@goncaloqueiros.net>
+*/
 include_once dirname(__FILE__) . "/../HighchartOption.php";
 
 class HighchartOptionTest extends PHPUnit_Framework_TestCase
