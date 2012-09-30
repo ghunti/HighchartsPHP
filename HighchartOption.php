@@ -31,7 +31,10 @@ class HighchartOption implements ArrayAccess
      */
     public function __construct($value = null)
     {
-        if (!is_array($value)) {
+        if (is_string($value)) {
+            //Avoid json-encode errors latter on
+            $this->_value = utf8_encode($value);
+        } else if (!is_array($value)) {
             $this->_value = $value;
         } else {
             foreach($value as $key => $val) {
