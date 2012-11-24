@@ -33,7 +33,11 @@ class HighchartOption implements ArrayAccess
     {
         if (is_string($value)) {
             //Avoid json-encode errors latter on
-            $this->_value = utf8_encode($value);
+            $this->_value = iconv(
+                mb_detect_encoding($value),
+                "UTF-8",
+                $value
+            );
         } else if (!is_array($value)) {
             $this->_value = $value;
         } else {

@@ -24,7 +24,11 @@ class HighchartJsExpr
      */
     public function __construct($expression)
     {
-        $this->_expression = utf8_encode($expression);
+        $this->_expression = iconv(
+            mb_detect_encoding($expression),
+            "UTF-8",
+            $expression
+        );
     }
 
     /**
