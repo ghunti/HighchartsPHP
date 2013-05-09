@@ -1,5 +1,5 @@
 <?php
-include_once "../../../Highchart.php";
+include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'Highchart.php';
 
 $chart = new Highchart();
 $chart->chart->renderTo = "container";
