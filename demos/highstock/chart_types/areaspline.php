@@ -1,5 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'Highchart.php';
+include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
+     DIRECTORY_SEPARATOR . 'Highchart.php';
 
 $chart = new Highchart(Highchart::HIGHSTOCK);
 
@@ -17,26 +18,34 @@ $chart->series[0]->fillColor->linearGradient->y1 = 0;
 $chart->series[0]->fillColor->linearGradient->x2 = 0;
 $chart->series[0]->fillColor->linearGradient->y2 = 1;
 
-$chart->series[0]->fillColor->stops = array(array(0, new HighchartJsExpr("Highcharts.getOptions().colors[0]")),
-                                            array(1, "rgba(0,0,0,0)"));
+$chart->series[0]->fillColor->stops = array(
+    array(
+        0,
+        new HighchartJsExpr("Highcharts.getOptions().colors[0]")
+    ),
+    array(
+        1,
+        "rgba(0,0,0,0)"
+    )
+);
 ?>
 
 <html>
-  <head>
-    <title>Areaspline</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <?php
-      foreach ($chart->getScripts() as $script) {
-         echo '<script type="text/javascript" src="' . $script . '"></script>';
-      }
-    ?>
-  </head>
-  <body>
-    <div id="container"></div>
-    <script type="text/javascript">
-        $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
-            <?php echo $chart->render("chart"); ?>;
-        });
-    </script>
-  </body>
+    <head>
+        <title>Areaspline</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php
+        foreach ($chart->getScripts() as $script) {
+            echo '<script type="text/javascript" src="' . $script . '"></script>';
+        }
+        ?>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
+                <?php echo $chart->render("chart"); ?>;
+            });
+        </script>
+    </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'Highchart.php';
+include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
+     DIRECTORY_SEPARATOR . 'Highchart.php';
 
 $chart = new Highchart();
 
@@ -25,27 +26,59 @@ $chart->tooltip->formatter = new HighchartJsExpr("function() { return ''+ this.x
 
 $chart->plotOptions->spline->marker->enable = false;
 $chart->series[]->name = 'Temperature';
-$chart->series[0]->data = array(array(0, 15), array(10, -50), array(20, -56.5), array(30, -46.5), array(40, -22.1),
-                                array(50, -2.5), array(60, -27.7), array(70, -55.7), array(80, -76.5));
+$chart->series[0]->data = array(
+    array(
+        0,
+        15
+    ),
+    array(
+        10,
+        - 50
+    ),
+    array(
+        20,
+        - 56.5
+    ),
+    array(
+        30,
+        - 46.5
+    ),
+    array(
+        40,
+        - 22.1
+    ),
+    array(
+        50,
+        - 2.5
+    ),
+    array(
+        60,
+        - 27.7
+    ),
+    array(
+        70,
+        - 55.7
+    ),
+    array(
+        80,
+        - 76.5
+    )
+);
 
 ?>
 
 <html>
-  <head>
-    <title>Spline with inverted axes</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <?php
-      foreach ($chart->getScripts() as $script) {
-         echo '<script type="text/javascript" src="' . $script . '"></script>';
-      }
-    ?>
-  </head>
-  <body>
-    <div id="container"></div>
-    <script type="text/javascript">
-    <?php
-      echo $chart->render("chart1");
-    ?>
-    </script>
-  </body>
+    <head>
+        <title>Spline with inverted axes</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php
+        foreach ($chart->getScripts() as $script) {
+            echo '<script type="text/javascript" src="' . $script . '"></script>';
+        }
+        ?>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript"><?php echo $chart->render("chart1"); ?></script>
+    </body>
 </html>

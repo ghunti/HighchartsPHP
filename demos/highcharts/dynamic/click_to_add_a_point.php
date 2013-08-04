@@ -1,13 +1,20 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'Highchart.php';
+include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
+     DIRECTORY_SEPARATOR . 'Highchart.php';
 
 $chart = new Highchart();
 
 $chart->chart->renderTo = "container";
 $chart->chart->type = "scatter";
-$chart->chart->margin = array(70, 50, 60, 80);
+$chart->chart->margin = array(
+    70,
+    50,
+    60,
+    80
+);
 
-$chart->chart->events->click = new HighchartJsExpr("function(e) {
+$chart->chart->events->click = new HighchartJsExpr(
+    "function(e) {
     var x = e.xAxis[0].value,
         y = e.yAxis[0].value,
         series = this.series[0];
@@ -23,36 +30,44 @@ $chart->yAxis->minPadding = 0.2;
 $chart->yAxis->maxPadding = 0.2;
 $chart->yAxis->maxZoom = 60;
 
-$chart->yAxis->plotLines[] = array('value' => 0,
-                                   'width' => 1,
-                                   'color' => "#808080");
+$chart->yAxis->plotLines[] = array(
+    'value' => 0,
+    'width' => 1,
+    'color' => "#808080"
+);
 
 $chart->legend->enabled = false;
 $chart->exporting->enabled = false;
 $chart->plotOptions->series->lineWidth = 1;
 
-$chart->plotOptions->series->point->events->click = new HighchartJsExpr("function() {
+$chart->plotOptions->series->point->events->click = new HighchartJsExpr(
+    "function() {
     if (this.series.data.length > 1) this.remove(); }");
 
-$chart->series[]->data = array(array(20,20), array(80,80));
+$chart->series[]->data = array(
+    array(
+        20,
+        20
+    ),
+    array(
+        80,
+        80
+    )
+);
 ?>
 
 <html>
-  <head>
+    <head>
     <title>Click to add a point</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <?php
-      foreach ($chart->getScripts() as $script) {
-         echo '<script type="text/javascript" src="' . $script . '"></script>';
-      }
-    ?>
-  </head>
-  <body>
-    <div id="container"></div>
-    <script type="text/javascript">
-    <?php
-      echo $chart->render("chart1");
-    ?>
-    </script>
-  </body>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php
+        foreach ($chart->getScripts() as $script) {
+            echo '<script type="text/javascript" src="' . $script . '"></script>';
+        }
+        ?>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript"><?php echo $chart->render("chart1"); ?></script>
+    </body>
 </html>

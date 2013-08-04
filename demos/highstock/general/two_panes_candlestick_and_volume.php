@@ -1,5 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'Highchart.php';
+include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
+     DIRECTORY_SEPARATOR . 'Highchart.php';
 
 $chart = new Highchart(Highchart::HIGHSTOCK);
 
@@ -17,67 +18,78 @@ $rightYaxis->top = 300;
 $rightYaxis->height = 100;
 $rightYaxis->offset = 0;
 $rightYaxis->lineWidth = 2;
-$chart->yAxis = array($leftYaxis, $rightYaxis);
+$chart->yAxis = array(
+    $leftYaxis,
+    $rightYaxis
+);
 
-$chart->series[] = array('type' => "candlestick",
-                         'name' => "AAPL",
-                         'data' => new HighchartJsExpr("ohlc"),
-                         'dataGrouping' => array('units' => new HighchartJsExpr("groupingUnits")));
+$chart->series[] = array(
+    'type' => "candlestick",
+    'name' => "AAPL",
+    'data' => new HighchartJsExpr("ohlc"),
+    'dataGrouping' => array(
+        'units' => new HighchartJsExpr("groupingUnits")
+    )
+);
 
-$chart->series[] = array('type' => "column",
-                         'name' => "Volume",
-                         'data' => new HighchartJsExpr("volume"),
-                         'yAxis' => 1,
-                         'dataGrouping' => array('units' => new HighchartJsExpr("groupingUnits")));
+$chart->series[] = array(
+    'type' => "column",
+    'name' => "Volume",
+    'data' => new HighchartJsExpr("volume"),
+    'yAxis' => 1,
+    'dataGrouping' => array(
+        'units' => new HighchartJsExpr("groupingUnits")
+    )
+);
 ?>
 
 <html>
-  <head>
-    <title>Two panes, candlestick and volume</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <?php
-      foreach ($chart->getScripts() as $script) {
-         echo '<script type="text/javascript" src="' . $script . '"></script>';
-      }
-    ?>
-  </head>
-  <body>
-    <div id="container"></div>
-    <script type="text/javascript">
-        $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function(data) {
+    <head>
+        <title>Two panes, candlestick and volume</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php
+        foreach ($chart->getScripts() as $script) {
+            echo '<script type="text/javascript" src="' . $script . '"></script>';
+        }
+        ?>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function(data) {
 
-            // split the data set into ohlc and volume
-            var ohlc = [],
-              volume = [],
-              dataLength = data.length;
+                // split the data set into ohlc and volume
+                var ohlc = [],
+                  volume = [],
+                  dataLength = data.length;
 
-            for (i = 0; i < dataLength; i++) {
-              ohlc.push([
-                data[i][0], // the date
-                data[i][1], // open
-                data[i][2], // high
-                data[i][3], // low
-                data[i][4] // close
-              ]);
+                for (i = 0; i < dataLength; i++) {
+                  ohlc.push([
+                    data[i][0], // the date
+                    data[i][1], // open
+                    data[i][2], // high
+                    data[i][3], // low
+                    data[i][4] // close
+                  ]);
 
-              volume.push([
-                data[i][0], // the date
-                data[i][5] // the volume
-              ])
-            }
+                  volume.push([
+                    data[i][0], // the date
+                    data[i][5] // the volume
+                  ])
+                }
 
-            // set the allowed units for data grouping
-            var groupingUnits = [[
-              'week',                         // unit name
-              [1]                             // allowed multiples
-            ], [
-              'month',
-              [1, 2, 3, 4, 6]
-            ]];
+                // set the allowed units for data grouping
+                var groupingUnits = [[
+                  'week',                         // unit name
+                  [1]                             // allowed multiples
+                ], [
+                  'month',
+                  [1, 2, 3, 4, 6]
+                ]];
 
-            // create the chart
-            chart = <?php echo $chart->render(); ?>;
-        });
-    </script>
-  </body>
+                // create the chart
+                chart = <?php echo $chart->render(); ?>;
+            });
+        </script>
+    </body>
 </html>
