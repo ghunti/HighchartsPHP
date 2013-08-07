@@ -7,7 +7,7 @@ HigchartPHP isn't a simple port of the javascript library to PHP. It was designe
 Setup
 -----
 
-The config.php file contains the paths to every js file needed by highcharts to work.
+The config.dist.php file contains the paths to every js file needed by highcharts to work, and you MUST copy it to config.php
 The original config file has paths to all files, you can change any one you want to point to your local file system or to point to a different url.
 
 Usage

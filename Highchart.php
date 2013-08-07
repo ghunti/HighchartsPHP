@@ -122,7 +122,7 @@ class Highchart implements ArrayAccess
      */
     public function getScripts()
     {
-        include_once "conf.php";
+        include_once "config.php";
 
         $scripts = array();
         switch ($this->_jsEngine) {
