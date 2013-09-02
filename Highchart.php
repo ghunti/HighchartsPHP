@@ -48,16 +48,24 @@ class Highchart implements ArrayAccess
     private $_jsEngine;
 
     /**
+     * Whether or not to include the scripts specified under the extra key on the config file
+     *
+     * @var boolean
+     */
+    private $_extraScripts = false;
+
+    /**
      * The Highchart constructor
      *
      * @param int $chartType The chart type (Either self::HIGHCHART or self::HIGHSTOCK)
      * @param int $jsEngine  The javascript library to use
      *                       (One of ENGINE_JQUERY, ENGINE_MOOTOOLS or ENGINE_PROTOTYPE)
      */
-    public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY)
+    public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY, $extraScripts = false)
     {
         $this->_chartType = is_null($chartType) ? self::HIGHCHART : $chartType;
         $this->_jsEngine = is_null($jsEngine) ? self::ENGINE_JQUERY : $jsEngine;
+        $this->_extraScripts = $extraScripts;
     }
 
     /**
@@ -160,6 +168,13 @@ class Highchart implements ArrayAccess
                 break;
         }
 
+        //Include all scripts under the 'extra' key on config file
+        if ($this->_extraScripts === true) {
+            foreach ($jsFiles['extra'] as $scriptInfo) {
+                $scripts[] = $scriptInfo['path'] . $scriptInfo['name'];
+            }
+        }
+
         return $scripts;
     }
 
@@ -171,6 +186,14 @@ class Highchart implements ArrayAccess
         foreach ($this->getScripts() as $script) {
             echo '<script type="text/javascript" src="' . $script . '"></script>';
         }
+    }
+
+    /**
+     * Mark extra javascript scripts to be included on the page
+     */
+    public function includeExtraScripts()
+    {
+        $this->_extraScripts = true;
     }
 
     /**

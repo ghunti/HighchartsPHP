@@ -47,5 +47,12 @@ $jsFiles = array(
     'highstockPrototypeAdapter' => array(
         'name' => 'prototype-adapter.js',
         'path' => 'http://code.highcharts.com/stock/adapters/'
+    ),
+
+    'extra' => array(
+        array(
+            'name' => 'highcharts-more.js',
+            'path' => 'http://code.highcharts.com/'
+        )
     )
 );
