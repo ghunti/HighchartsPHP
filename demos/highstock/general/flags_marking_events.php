@@ -71,11 +71,7 @@ $chart->series[1]->width = 16;
     <head>
         <title>Flags marking events</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <?php
-        foreach ($chart->getScripts() as $script) {
-            echo '<script type="text/javascript" src="' . $script . '"></script>';
-        }
-        ?>
+        <?php $chart->printScripts(); ?>
     </head>
     <body>
         <div id="container"></div>

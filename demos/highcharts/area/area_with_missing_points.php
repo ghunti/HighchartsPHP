@@ -71,11 +71,7 @@ $chart->series[] = array(
     <head>
         <title>Area with missing points</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <?php
-        foreach ($chart->getScripts() as $script) {
-            echo '<script type="text/javascript" src="' . $script . '"></script>';
-        }
-        ?>
+        <?php $chart->printScripts(); ?>
     </head>
     <body>
         <div id="container"></div>

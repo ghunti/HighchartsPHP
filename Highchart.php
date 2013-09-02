@@ -164,6 +164,16 @@ class Highchart implements ArrayAccess
     }
 
     /**
+     * Prints javascript script tags for all scripts that need to be included on page
+     */
+    public function printScripts()
+    {
+        foreach ($this->getScripts() as $script) {
+            echo '<script type="text/javascript" src="' . $script . '"></script>';
+        }
+    }
+
+    /**
      * Global options that don't apply to each chart like lang and global
      * must be set using the Highcharts.setOptions javascript method.
      * This method receives a set of HighchartOption and returns the

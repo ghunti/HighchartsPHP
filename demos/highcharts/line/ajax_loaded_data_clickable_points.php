@@ -95,11 +95,7 @@ $chart->series[]->name = 'New visitors';
     <head>
     <title>Ajax loaded data clickable points</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <?php
-        foreach ($chart->getScripts() as $script) {
-            echo '<script type="text/javascript" src="' . $script . '"></script>';
-        }
-        ?>
+        <?php $chart->printScripts(); ?>
         <script type="text/javascript" src="http://www.highcharts.com/highslide/highslide-full.min.js"></script>
         <script type="text/javascript" src="http://www.highcharts.com/highslide/highslide.config.js" charset="utf-8"></script>
         <link rel="stylesheet" type="text/css" href="http://www.highcharts.com/highslide/highslide.css" />
