@@ -1,4 +1,4 @@
 .buildpath
 .project
 .settings/
-config.php
+/vendor

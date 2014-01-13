@@ -8,7 +8,10 @@
 *
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
-include_once "HighchartJsExpr.php";
+
+namespace Ghunti\HighchartsPHP;
+
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 class HighchartOptionRenderer
 {
@@ -53,7 +56,7 @@ class HighchartOptionRenderer
         }
 
         if (is_object($data)) {
-            if ($data instanceof stdClass) {
+            if ($data instanceof \stdClass) {
                 return $data;
             } elseif (!$data instanceof HighchartJsExpr) {
                 $data = $data->getValue();

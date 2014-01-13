@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 
@@ -22,9 +22,11 @@ $chart->xAxis->title->enabled = false;
 $chart->yAxis->title->text = "Percent";
 $chart->tooltip->formatter = new HighchartJsExpr(
     "function() {
-                              return ''+
-                              this.x +': '+ Highcharts.numberFormat(this.percentage, 1) +'% ('+
-                              Highcharts.numberFormat(this.y, 0, ',') +' millions)'; }");
+        return ''+
+        this.x +': '+ Highcharts.numberFormat(this.percentage, 1) +'% ('+
+        Highcharts.numberFormat(this.y, 0, ',') +' millions)';
+    }"
+);
 $chart->plotOptions->area->stacking = "percent";
 $chart->plotOptions->area->lineColor = "#ffffff";
 $chart->plotOptions->area->lineWidth = 1;

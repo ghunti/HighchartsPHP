@@ -9,9 +9,14 @@ The companion webpage can be found at http://www.goncaloqueiros.net/highcharts.p
 Setup
 -----
 
-* Copy config.dist.php to config.php
-
-The `config.php` file contains the paths to every js file needed by highcharts to work. Change any path you want to point to your local file system or to point to a different url. 
+The recommended way to install HighchartsPHP is through  [`Composer`](http://getcomposer.org). Just create a ``composer.json`` file and run the ``php composer.phar install`` command to install it:
+```json
+{
+    "require": {
+        "ghunti/highcharts-php": "~2.0"
+    }
+}
+```
 
 Usage
 -----
@@ -48,7 +53,7 @@ You can also create simple arrays
 
 ```php
 $chart->series[] = array('name' => 'Tokyo', 'data' => array(7.0, 6.9, 9.5));
-or  
+or
 $chart->series[0] = array('name' => 'Tokyo', 'data' => array(7.0, 6.9, 9.5));
 or
 $chart->series[0]->name = 'Tokyo';
@@ -57,7 +62,7 @@ $chart->series[0]->data = array(7.0, 6.9, 9.5);
 
 ### Render
 
-To get all the script necessary to render your chart you can use the `printScripts()` method: 
+To get all the script necessary to render your chart you can use the `printScripts()` method:
 
 ```php
 $chart->printScripts();
@@ -109,7 +114,7 @@ A good example of this can be found at [clock demo](https://github.com/ghunti/Hi
 
 ```php
 $backgroundOptions = new HighchartOption();
-$backgroundOptions->radiaGradient = array(
+$backgroundOptions->radialGradient = array(
     'cx' => 0.5,
     'cy' => -0.4,
     'r' => 1.9
@@ -149,6 +154,20 @@ $theme = new HighchartOption();
 $theme->colors = array('#058DC7', '#50B432', '#ED561B');
 ...
 echo Highchart::setOptions($theme);
+```
+
+### Configuration
+By default HighchartsPHP library comes with configurations to work out of the box. If you wish to change the path of any js library loaded, have a look at ``src/config.php``.
+In case you need to change some of this values you should use the ``setConfigurations``method:
+```php
+$chart = new Highchart();
+$chart->setConfigurations(
+    array(
+        'jQuery' => array(
+            'name' => 'anotherName'
+        )
+    )
+);
 ```
 
 Demos

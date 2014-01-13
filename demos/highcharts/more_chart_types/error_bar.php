@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 $chart->includeExtraScripts();
@@ -54,17 +54,17 @@ $chart->series = array(
         'type' => 'errorbar',
         'yAxis' => 1,
         'data' => array(
-            array(48, 51), 
-            array(68, 73), 
-            array(92, 110), 
-            array(128, 136), 
-            array(140, 150), 
-            array(171, 179), 
-            array(135, 143), 
-            array(142, 149), 
-            array(204, 220), 
-            array(189, 199), 
-            array(95, 110), 
+            array(48, 51),
+            array(68, 73),
+            array(92, 110),
+            array(128, 136),
+            array(140, 150),
+            array(171, 179),
+            array(135, 143),
+            array(142, 149),
+            array(204, 220),
+            array(189, 199),
+            array(95, 110),
             array(52, 56)
         ),
         'tooltip' => array(
@@ -85,17 +85,17 @@ $chart->series = array(
         'name' => 'Temperature error',
         'type' => 'errorbar',
         'data' => array(
-            array(6, 8), 
-            array(5.9, 7.6), 
-            array(9.4, 10.4), 
-            array(14.1, 15.9), 
-            array(18.0, 20.1), 
-            array(21.0, 24.0), 
-            array(23.2, 25.3), 
-            array(26.1, 27.8), 
-            array(23.2, 23.9), 
-            array(18.0, 21.1), 
-            array(12.9, 14.0), 
+            array(6, 8),
+            array(5.9, 7.6),
+            array(9.4, 10.4),
+            array(14.1, 15.9),
+            array(18.0, 20.1),
+            array(21.0, 24.0),
+            array(23.2, 25.3),
+            array(26.1, 27.8),
+            array(23.2, 23.9),
+            array(18.0, 21.1),
+            array(12.9, 14.0),
             array(7.6, 10.0)
         ),
         'tooltip' => array(

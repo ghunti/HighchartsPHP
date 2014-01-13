@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 $chart->includeExtraScripts();
@@ -70,7 +70,7 @@ $chart->plotOptions->series->pointPlacement = 'on';
                     <td class="data">0.00</td>
                     <td class="data">0.00</td>
                     <td class="data">3.75</td>
-                </tr>        
+                </tr>
                 <tr nowrap bgcolor="#DDDDDD">
                     <td class="dir">NNE</td>
                     <td class="data">0.62</td>
@@ -224,7 +224,7 @@ $chart->plotOptions->series->pointPlacement = 'on';
                     <td class="data">0.69</td>
                     <td class="data">0.03</td>
                     <td class="data">9.28</td>
-                </tr>        
+                </tr>
                 <tr nowrap bgcolor="#DDDDDD">
                     <td class="dir">NNW</td>
                     <td class="data">1.51</td>

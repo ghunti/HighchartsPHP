@@ -1,11 +1,13 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
+use Ghunti\HighchartsPHP\HighchartOption;
+use Ghunti\HighchartsPHP\HighchartOptionRenderer;
 
 $chart = new Highchart();
 $chart->includeExtraScripts();
 $backgroundOptions = new HighchartOption();
-$backgroundOptions->radiaGradient = array(
+$backgroundOptions->radialGradient = array(
     'cx' => 0.5,
     'cy' => -0.4,
     'r' => 1.9
@@ -25,10 +27,12 @@ $chart->chart = array(
 );
 $chart->credits->enabled = false;
 $chart->title->text = 'The Highcharts clock';
-$chart->pane->background[] = array(
+$chart->pane->background = array(
     new stdClass(),
-    array('backgroundColor' => new HighchartJsExpr('Highcharts.svg ? ' . 
-        HighchartOptionRenderer::render($backgroundOptions) . ' : null')
+    array(
+        'backgroundColor' => new HighchartJsExpr(
+            'Highcharts.svg ? ' . HighchartOptionRenderer::render($backgroundOptions) . ' : null'
+        )
     )
 );
 $chart->yAxis = array(
@@ -39,20 +43,20 @@ $chart->yAxis = array(
     'max' => 12,
     'lineWidth' => 0,
     'showFirstLabel' => false,
-     
+
     'minorTickInterval' => 'auto',
     'minorTickWidth' => 1,
     'minorTickLength' => 5,
     'minorTickPosition' => 'inside',
     'minorGridLineWidth' => 0,
     'minorTickColor' => '#666',
-    
+
     'tickInterval' => 1,
     'tickWidth' => 2,
     'tickPosition' => 'inside',
     'tickLength' => 10,
     'tickColor' => '#666',
-    
+
     'title' => array(
         'text' => 'Powered by<br/>Highcharts',
         'style' => array(
@@ -116,14 +120,14 @@ $chart->series[] = array(
              */
             function getNow () {
                 var now = new Date();
-                    
+
                 return {
                     hours: now.getHours() + now.getMinutes() / 60,
                     minutes: now.getMinutes() * 12 / 60 + now.getSeconds() * 12 / 3600,
                     seconds: now.getSeconds() * 12 / 60
                 };
             };
-            
+
             /**
              * Pad numbers
              */
@@ -131,7 +135,7 @@ $chart->series[] = array(
                 // Create an array of the remaining length +1 and join it with 0's
                 return new Array((length || 2) + 1 - String(number).length).join(0) + number;
             }
-            
+
             var now = getNow();
             $('#container').highcharts(<?php echo $chart->renderOptions();?>,
                 // Move
@@ -142,22 +146,22 @@ $chart->series[] = array(
                             second = chart.get('second'),
                             now = getNow(),
                             // run animation unless we're wrapping around from 59 to 0
-                            animation = now.seconds == 0 ? 
-                                false : 
+                            animation = now.seconds == 0 ?
+                                false :
                                 {
                                     easing: 'easeOutElastic'
                                 };
-                                
+
                         // Cache the tooltip text
-                        chart.tooltipText = 
-                            pad(Math.floor(now.hours), 2) + ':' + 
-                            pad(Math.floor(now.minutes * 5), 2) + ':' + 
+                        chart.tooltipText =
+                            pad(Math.floor(now.hours), 2) + ':' +
+                            pad(Math.floor(now.minutes * 5), 2) + ':' +
                             pad(now.seconds * 5, 2);
-                        
+
                         hour.update(now.hours, true, animation);
                         minute.update(now.minutes, true, animation);
                         second.update(now.seconds, true, animation);
-                        
+
                     }, 1000);
                 });
             // Extend jQuery with some easing (copied from jQuery UI)

@@ -8,7 +8,10 @@
 *
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
-class HighchartOption implements ArrayAccess
+
+namespace Ghunti\HighchartsPHP;
+
+class HighchartOption implements \ArrayAccess
 {
     /**
      * An array of HighchartOptions

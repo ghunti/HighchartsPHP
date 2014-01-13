@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart(Highchart::HIGHSTOCK);
 $chart->includeExtraScripts();
@@ -59,9 +59,9 @@ $chart->series[] = array(
         <script type="text/javascript">
             $.getJSON('http://www.highcharts.com/samples/data/from-sql.php?callback=?', function(data) {
 
-                // Add a null value for the end date 
+                // Add a null value for the end date
                 data = [].concat(data, [[Date.UTC(2011, 9, 14, 19, 59), null, null, null, null]]);
-    
+
                 // create the chart
                 $('#container').highcharts('StockChart',<?php echo $chart->renderOptions(); ?>)}
             );
@@ -81,7 +81,7 @@ $chart->series[] = array(
                     chart.series[0].setData(data);
                     chart.hideLoading();
                 });
-                
+
             }
         </script>
     </body>

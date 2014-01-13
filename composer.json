@@ -1,0 +1,29 @@
+{
+    "name": "ghunti/highcharts-php",
+    "type": "library",
+    "description": "A php wrapper for highcharts and highstock javascript libraries",
+    "keywords": ["highcharts", "highstock", "php", "charts", "javascript"],
+    "homepage": "http://goncaloqueiros.net/highcharts.php",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Gonçalo Queirós",
+            "email": "mail@goncaloqueiros.net",
+            "homepage": "http://goncaloqueiros.net",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "mail@goncaloqueiros.net",
+        "issues": "https://github.com/ghunti/HighchartsPHP/issues",
+        "source": "https://github.com/ghunti/HighchartsPHP"
+    },
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ghunti\\HighchartsPHP\\": "src/"
+        }
+    }
+}

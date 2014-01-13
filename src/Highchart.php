@@ -8,10 +8,13 @@
 *
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
-include_once "HighchartOption.php";
-include_once "HighchartOptionRenderer.php";
 
-class Highchart implements ArrayAccess
+namespace Ghunti\HighchartsPHP;
+
+use Ghunti\HighchartsPHP\HighchartOption;
+use Ghunti\HighchartsPHP\HighchartOptionRenderer;
+
+class Highchart implements \ArrayAccess
 {
     //The chart type.
     //A regullar higchart
@@ -29,7 +32,7 @@ class Highchart implements ArrayAccess
      *
      * @var array
      */
-    private $_options = array();
+    protected $_options = array();
 
     /**
      * The chart type.
@@ -37,7 +40,7 @@ class Highchart implements ArrayAccess
      *
      * @var int
      */
-    private $_chartType;
+    protected $_chartType;
 
     /**
      * The javascript library to use.
@@ -45,14 +48,21 @@ class Highchart implements ArrayAccess
      *
      * @var int
      */
-    private $_jsEngine;
+    protected $_jsEngine;
 
     /**
      * Whether or not to include the scripts specified under the extra key on the config file
      *
      * @var boolean
      */
-    private $_extraScripts = false;
+    protected $_extraScripts = false;
+
+    /**
+     * Any configurations to use instead of the default ones
+     *
+     * @var array An array with same structure as the config.php file
+     */
+    protected $_confs = array();
 
     /**
      * The Highchart constructor
@@ -66,6 +76,23 @@ class Highchart implements ArrayAccess
         $this->_chartType = is_null($chartType) ? self::HIGHCHART : $chartType;
         $this->_jsEngine = is_null($jsEngine) ? self::ENGINE_JQUERY : $jsEngine;
         $this->_extraScripts = $extraScripts;
+        //Load default configurations
+        $this->setConfigurations();
+    }
+
+    /**
+     * Override default configuration values with the ones provided.
+     * The provided array should have the same structure as the config.php file.
+     * If you wish to override a single value you would pass something like:
+     *     $chart = new Highchart();
+     *     $chart->setConfigurations(array('jQuery' => array('name' => 'newFile')));
+     *
+     * @param array $configurations The new configuration values
+     */
+    public function setConfigurations($configurations = array())
+    {
+        include __DIR__ . DIRECTORY_SEPARATOR . "config.php";
+        $this->_confs = array_replace_recursive($jsFiles, $configurations);
     }
 
     /**
@@ -118,29 +145,27 @@ class Highchart implements ArrayAccess
      */
     public function getScripts()
     {
-        include __DIR__ . DIRECTORY_SEPARATOR . "config.php";
-
         $scripts = array();
         switch ($this->_jsEngine) {
             case self::ENGINE_JQUERY:
-                $scripts[] = $jsFiles['jQuery']['path'] . $jsFiles['jQuery']['name'];
+                $scripts[] = $this->_confs['jQuery']['path'] . $this->_confs['jQuery']['name'];
                 break;
 
             case self::ENGINE_MOOTOOLS:
-                $scripts[] = $jsFiles['mootools']['path'] . $jsFiles['mootools']['name'];
+                $scripts[] = $this->_confs['mootools']['path'] . $this->_confs['mootools']['name'];
                 if ($this->_chartType === self::HIGHCHART) {
-                    $scripts[] = $jsFiles['highchartsMootoolsAdapter']['path'] . $jsFiles['highchartsMootoolsAdapter']['name'];
+                    $scripts[] = $this->_confs['highchartsMootoolsAdapter']['path'] . $this->_confs['highchartsMootoolsAdapter']['name'];
                 } else {
-                    $scripts[] = $jsFiles['highstockMootoolsAdapter']['path'] . $jsFiles['highstockMootoolsAdapter']['name'];
+                    $scripts[] = $this->_confs['highstockMootoolsAdapter']['path'] . $this->_confs['highstockMootoolsAdapter']['name'];
                 }
                 break;
 
             case self::ENGINE_PROTOTYPE:
-                $scripts[] = $jsFiles['prototype']['path'] . $jsFiles['prototype']['name'];
+                $scripts[] = $this->_confs['prototype']['path'] . $this->_confs['prototype']['name'];
                 if ($this->_chartType === self::HIGHCHART) {
-                    $scripts[] = $jsFiles['highchartsPrototypeAdapter']['path'] . $jsFiles['highchartsPrototypeAdapter']['name'];
+                    $scripts[] = $this->_confs['highchartsPrototypeAdapter']['path'] . $this->_confs['highchartsPrototypeAdapter']['name'];
                 } else {
-                    $scripts[] = $jsFiles['highstockPrototypeAdapter']['path'] . $jsFiles['highstockPrototypeAdapter']['name'];
+                    $scripts[] = $this->_confs['highstockPrototypeAdapter']['path'] . $this->_confs['highstockPrototypeAdapter']['name'];
                 }
                 break;
 
@@ -148,17 +173,17 @@ class Highchart implements ArrayAccess
 
         switch ($this->_chartType) {
             case self::HIGHCHART:
-                $scripts[] = $jsFiles['highcharts']['path'] . $jsFiles['highcharts']['name'];
+                $scripts[] = $this->_confs['highcharts']['path'] . $this->_confs['highcharts']['name'];
                 break;
 
             case self::HIGHSTOCK:
-                $scripts[] = $jsFiles['highstock']['path'] . $jsFiles['highstock']['name'];
+                $scripts[] = $this->_confs['highstock']['path'] . $this->_confs['highstock']['name'];
                 break;
         }
 
         //Include all scripts under the 'extra' key on config file
         if ($this->_extraScripts === true) {
-            foreach ($jsFiles['extra'] as $scriptInfo) {
+            foreach ($this->_confs['extra'] as $scriptInfo) {
                 $scripts[] = $scriptInfo['path'] . $scriptInfo['name'];
             }
         }

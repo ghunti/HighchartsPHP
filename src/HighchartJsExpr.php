@@ -8,6 +8,9 @@
 *
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
+
+namespace Ghunti\HighchartsPHP;
+
 class HighchartJsExpr
 {
     /**

@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 
@@ -17,8 +17,10 @@ $chart->xAxis->showLastLabel = 1;
 $chart->yAxis->title->text = "Weight (kg)";
 $chart->tooltip->formatter = new HighchartJsExpr(
     "function() {
-                                  return ''+
-                                  this.x +' cm, '+ this.y +' kg';}");
+        return ''+
+        this.x +' cm, '+ this.y +' kg';
+    }"
+);
 $chart->legend->layout = "vertical";
 $chart->legend->align = "left";
 $chart->legend->verticalAlign = "top";

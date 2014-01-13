@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 $chart->includeExtraScripts();
@@ -97,14 +97,14 @@ $chart->series[] = array(
                     setInterval(function() {
                         var point = chart.series[0].points[0],
                             newVal, inc = Math.round((Math.random() - 0.5) * 20);
-                
+
                         newVal = point.y + inc;
                         if (newVal < 0 || newVal > 200) {
                             newVal = point.y - inc;
                         }
-                
+
                         point.update(newVal);
-                
+
                     }, 3000);
                 }
             );

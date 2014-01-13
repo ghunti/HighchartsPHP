@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $masterChart = new Highchart();
 
@@ -117,12 +117,14 @@ $detailChart->xAxis->type = "datetime";
 $detailChart->yAxis->title->text = null;
 $detailChart->yAxis->maxZoom = 0.1;
 
-$chart->tooltip->formatter = new HighchartJsExpr(
+$detailChart->tooltip->formatter = new HighchartJsExpr(
     "function() {
-    var point = this.points[0];
-    return '<b>'+ point.series.name +'</b><br/>'+
-    Highcharts.dateFormat('%A %B %e %Y', this.x) + ':<br/>'+
-    '1 USD = '+ Highcharts.numberFormat(point.y, 2) +' EUR'; }");
+        var point = this.points[0];
+        return '<b>'+ point.series.name +'</b><br/>'+
+            Highcharts.dateFormat('%A %B %e %Y', this.x) + ':<br/>'+
+            '1 USD = '+ Highcharts.numberFormat(point.y, 2) +' EUR';
+    }"
+);
 
 $detailChart->tooltip->shared = 1;
 $detailChart->legend->enabled = false;
@@ -144,7 +146,7 @@ $detailChart->exporting->enabled = false;
     <head>
         <title>Master detail chart</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <?php $chart->printScripts(); ?>
+        <?php $detailChart->printScripts(); ?>
     </head>
     <body>
         <div id="container"></div>

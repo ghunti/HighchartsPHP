@@ -1,6 +1,7 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
+use Ghunti\HighchartsPHP\HighchartOption;
 
 $chart = new Highchart(Highchart::HIGHSTOCK);
 

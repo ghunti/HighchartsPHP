@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 $chart->includeExtraScripts();
@@ -112,7 +112,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $('#container').highcharts(<?php echo $chart->renderOptions();?>, 
+            $('#container').highcharts(<?php echo $chart->renderOptions();?>,
             // Add some life
             function (chart) {
                 if (!chart.renderer.forExport) {

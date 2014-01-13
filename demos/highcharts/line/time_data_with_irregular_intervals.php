@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 
@@ -15,8 +15,10 @@ $chart->yAxis->title->text = "Snow depth (m)";
 $chart->yAxis->min = 0;
 $chart->tooltip->formatter = new HighchartJsExpr(
     "function() {
-                                    return '<b>'+ this.series.name +'</b><br/>'+
-                                    Highcharts.dateFormat('%e. %b', this.x) +': '+ this.y +' m';}");
+        return '<b>'+ this.series.name +'</b><br/>'+
+        Highcharts.dateFormat('%e. %b', this.x) +': '+ this.y +' m';
+    }"
+);
 
 $chart->series[]->name = "Winter 2007-2008";
 $chart->series[0]->data = array(

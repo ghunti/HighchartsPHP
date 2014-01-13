@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 
@@ -15,10 +15,12 @@ $chart->chart->margin = array(
 
 $chart->chart->events->click = new HighchartJsExpr(
     "function(e) {
-    var x = e.xAxis[0].value,
-        y = e.yAxis[0].value,
-        series = this.series[0];
-    series.addPoint([x, y]); }");
+        var x = e.xAxis[0].value,
+            y = e.yAxis[0].value,
+            series = this.series[0];
+            series.addPoint([x, y]);
+    }"
+);
 
 $chart->title->text = "User supplied data";
 $chart->subtitle->text = "Click the plot area to add a point. Click a point to remove it.";

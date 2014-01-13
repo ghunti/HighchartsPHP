@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' .
-     DIRECTORY_SEPARATOR . 'Highchart.php';
+use Ghunti\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPHP\HighchartJsExpr;
 
 $chart = new Highchart();
 
@@ -22,8 +22,8 @@ $chart->xAxis->title->enabled = false;
 $chart->yAxis->title->text = "Billions";
 $chart->yAxis->labels->formatter = new HighchartJsExpr("function() { return this.value / 1000; }");
 $chart->tooltip->formatter = new HighchartJsExpr(
-    "function() { return ''+
-                                  this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' millions';}");
+    "function() { return '' + this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' millions';}"
+);
 $chart->plotOptions->area->stacking = "normal";
 $chart->plotOptions->area->lineColor = "#666666";
 $chart->plotOptions->area->lineWidth = 1;
