@@ -2,3 +2,4 @@
 .project
 .settings/
 /vendor
+/composer.phar

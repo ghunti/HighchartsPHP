@@ -8,9 +8,12 @@
 *
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
-include_once dirname(__FILE__) . "/../Highchart.php";
 
-class HighchartTest extends PHPUnit_Framework_TestCase
+namespace Ghunti\HighchartPHP\Tests;
+
+use Ghunti\HighchartsPHP\Highchart;
+
+class HighchartTest extends \PHPUnit_Framework_TestCase
 {
     public function testRenderOptionsEncoding()
     {
@@ -24,7 +27,9 @@ class HighchartTest extends PHPUnit_Framework_TestCase
         );
 
         $result = $chart->renderOptions();
-        $this->assertEquals('{"test":{"utf8String":"\u00e1\u00f9 anything \u00fc","iso88591":"\u00e1\u00f9 anything \u00fc"}}', $result);
+        $this->assertEquals(
+            '{"test":{"utf8String":"\u00e1\u00f9 anything \u00fc","iso88591":"\u00e1\u00f9 anything \u00fc"}}',
+            $result
+        );
     }
 }
-?>

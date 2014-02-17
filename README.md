@@ -158,7 +158,7 @@ echo Highchart::setOptions($theme);
 
 ### Configuration
 By default HighchartsPHP library comes with configurations to work out of the box. If you wish to change the path of any js library loaded, have a look at ``src/config.php``.
-In case you need to change some of this values you should use the ``setConfigurations``method:
+In case you need to change some of this values you should use the ``setConfigurations`` method:
 ```php
 $chart = new Highchart();
 $chart->setConfigurations(
@@ -174,3 +174,12 @@ Demos
 -----
 
 All the Highcharts and Highstocks live demos present on http://www.highcharts.com under the demo gallery were reproduced using this library and you can find them on the demos folder or see a live example on http://www.goncaloqueiros.net/demos.php
+
+Tests
+-----
+You can run the unit tests with the following command:
+```bash
+$ cd path/to/HighchartsPHP/
+$ composer.phar install
+$ phpunit
+```
