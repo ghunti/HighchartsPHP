@@ -197,9 +197,11 @@ class Highchart implements \ArrayAccess
      */
     public function printScripts()
     {
+        $scripts = '';
         foreach ($this->getScripts() as $script) {
-            echo '<script type="text/javascript" src="' . $script . '"></script>';
+            $scripts .= '<script type="text/javascript" src="' . $script . '"></script>';
         }
+        return $scripts;
     }
 
     /**
