@@ -32,7 +32,7 @@ $chart = new Ghunti\HighchartsPHP\Highchart();
 
 ```php
 //To create a highstock chart with the jquery js engine
-$stockChart = new Highchart(Highchart::HIGHSTOCK);
+$stockChart = new Ghunti\HighchartsPHP\Highchart(Highchart::HIGHSTOCK);
 ```
 
 ```php
