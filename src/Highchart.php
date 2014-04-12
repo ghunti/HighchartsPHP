@@ -118,9 +118,9 @@ class Highchart implements \ArrayAccess
      */
     public function render($varName = null, $callback = null)
     {
-        $result = '';
+        $result = '<script type="text/javascript">';
         if (!is_null($varName)) {
-            $result = "$varName = ";
+            $result .= "$varName = ";
         }
 
         $result .= 'new Highcharts.';
@@ -133,6 +133,7 @@ class Highchart implements \ArrayAccess
         $result .= $this->renderOptions();
         $result .= is_null($callback) ? '' : ", $callback";
         $result .= ');';
+        $result .= '</script>';
         return $result;
     }
 
