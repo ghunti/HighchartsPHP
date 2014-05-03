@@ -65,6 +65,17 @@ class Highchart implements \ArrayAccess
     protected $_confs = array();
 
     /**
+     * Clone Highchart object
+     */
+    public function __clone()
+    {
+        foreach ($this->_options as $key => $value)
+        {
+            $this->_options[$key] = clone $value;
+        }
+    }
+
+    /**
      * The Highchart constructor
      *
      * @param int $chartType The chart type (Either self::HIGHCHART or self::HIGHSTOCK)

@@ -28,6 +28,17 @@ class HighchartOption implements \ArrayAccess
     private $_value;
 
     /**
+     * Clone HighchartOption object
+     */
+    public function __clone()
+    {
+        foreach ($this->_childs as $key => $value)
+        {
+            $this->_childs[$key] = clone $value;
+        }
+    }
+
+    /**
      * The HighchartOption constructor
      *
      * @param mixed $value The option value
