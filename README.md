@@ -27,12 +27,12 @@ You can create a highchart or highstock chart using one of the three js engine a
 
 ```php
 //This will create a highchart chart with the jquery js engine
-$chart = new Highchart();
+$chart = new Ghunti\HighchartsPHP\Highchart();
 ```
 
 ```php
 //To create a highstock chart with the jquery js engine
-$stockChart = new Highchart(Highchart::HIGHSTOCK);
+$stockChart = new Ghunti\HighchartsPHP\Highchart(Highchart::HIGHSTOCK);
 ```
 
 ```php
