@@ -124,10 +124,12 @@ class Highchart implements \ArrayAccess
      * @param string $varName The javascript chart variable name
      * @param string $callback The function callback to pass
      *                         to the Highcharts.Chart method
+     * @param boolean $withScriptTag It renders the javascript wrapped
+     *                               in html script tags
      *
      * @return string The javascript code
      */
-    public function render($varName = null, $callback = null)
+    public function render($varName = null, $callback = null, $withScriptTag = false)
     {
         $result = '';
         if (!is_null($varName)) {
@@ -144,6 +146,12 @@ class Highchart implements \ArrayAccess
         $result .= $this->renderOptions();
         $result .= is_null($callback) ? '' : ", $callback";
         $result .= ');';
+
+        if ($withScriptTag)
+        {
+            $result = '<script type="text/javascript">' . $result . '</script>';
+        }
+
         return $result;
     }
 
@@ -204,11 +212,23 @@ class Highchart implements \ArrayAccess
 
     /**
      * Prints javascript script tags for all scripts that need to be included on page
+     *
+     * @param boolean $return if true it returns the scripts rather then echoing them
      */
-    public function printScripts()
+    public function printScripts($return = false)
     {
+        $scripts = '';
         foreach ($this->getScripts() as $script) {
-            echo '<script type="text/javascript" src="' . $script . '"></script>';
+            $scripts .= '<script type="text/javascript" src="' . $script . '"></script>';
+        }
+
+        if ($return)
+        {
+            return $scripts;
+        }
+        else
+        {
+            echo $scripts;
         }
     }
 
