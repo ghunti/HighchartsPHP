@@ -80,7 +80,7 @@ And finally to render the chart object use the `render()` method:
 echo $chart->render("chart");
 ```
 
-The first (optional) argument passed to render method is the var name to be used by JavaScript and the second (optional) argument is the callback to be passed to the `Highcharts.Chart` method.
+The first (optional) argument passed to render method is the var name to be used by JavaScript and the second (optional) argument is the callback to be passed to the `Highcharts.Chart` method. The third and last (optional) argument flags that you want your script already wrapped around HTML script tags.
 
 Its also possible to render the chart options only by calling the ```renderOptions()``` method. Useful for times where the chart is used inside a ```$.getJson``` call for example
 
@@ -126,7 +126,9 @@ If no arguments are passed, it will include all the extra scripts
 $chart->includeExtraScripts();
 ```
 
-If you want to add any extra script to the default config file, feel free to open a PR.
+If you want to add any extra script to the default config file, feel free to open a PR. Here is the list of the current extra scripts available:
+* [Highcharts 3.0 charts](http://www.highcharts.com/component/content/article/2-articles/news/54-highcharts-3-0-released/)
+* [Exporting module](http://www.highcharts.com/docs/export-module/export-module-overview/)
 
 ### Use new Highcharts 3.0 charts
 
