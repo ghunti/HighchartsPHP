@@ -68,6 +68,12 @@ To get all the script necessary to render your chart you can use the `printScrip
 $chart->printScripts();
 ```
 
+Or if you don't want to directly echo the scripts and rather the function to return the script string:
+
+```php
+$chart->printScripts(true);
+```
+
 And finally to render the chart object use the `render()` method:
 
 ```php
@@ -97,14 +103,39 @@ $chart->tooltip->formatter = new HighchartJsExpr("function() {
 ### Empty javascript object {}
 If you wish to render an empty javascript object ```{}```, just assign the variable you want with ```new stdClass()```
 
+### Extra scripts
+
+To manually include a script for render use the ```addExtraScript``` function:
+
+```php
+$chart->addExtraScript('export', 'http://code.highcharts.com/modules/', 'exporting.js');
+```
+
+To include an extra script use the key that's on the config file or that was given manually via ```addExtraScript```
+```php
+$chart->includeExtraScripts(array('export'));
+```
+
+To include more than one script just add it to the array
+```php
+$chart->includeExtraScripts(array('export', 'highcharts-more'));
+```
+
+If no arguments are passed, it will include all the extra scripts
+```php
+$chart->includeExtraScripts();
+```
+
+If you want to add any extra script to the default config file, feel free to open a PR.
+
 ### Use new Highcharts 3.0 charts
 
 Highcharts 3.0 introduced a new set of charts that require an additional javascript file ```highcharts-more.js```.
 
-To include this extra script (and any script inside the ```extra``` key in ```config.php```) you need to call the ```includeExtraScripts()``` method.
+To include this extra script you need to call the ```includeExtraScripts``` method with the **highcharts-more** key.
 ```php
 $chart = new Highchart();
-$chart->includeExtraScripts();
+$chart->includeExtraScripts(array('highcharts-more'));
 ```
 
 ### Render only some options

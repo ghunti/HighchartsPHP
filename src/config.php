@@ -51,9 +51,13 @@ $jsFiles = array(
 
     //Extra scripts used by Highcharts 3.0 charts
     'extra' => array(
-        array(
+        'highcharts-more' => array(
             'name' => 'highcharts-more.js',
             'path' => 'http://code.highcharts.com/'
-        )
+        ),
+        'exporting' => array(
+            'name' => 'exporting.js',
+            'path' => 'http://code.highcharts.com/modules/'
+        ),
     )
 );

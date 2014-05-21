@@ -51,11 +51,11 @@ class Highchart implements \ArrayAccess
     protected $_jsEngine;
 
     /**
-     * Whether or not to include the scripts specified under the extra key on the config file
+     * Array with keys from extra scripts to be included
      *
-     * @var boolean
+     * @var array
      */
-    protected $_extraScripts = false;
+    protected $_extraScripts = array();
 
     /**
      * Any configurations to use instead of the default ones
@@ -82,11 +82,10 @@ class Highchart implements \ArrayAccess
      * @param int $jsEngine  The javascript library to use
      *                       (One of ENGINE_JQUERY, ENGINE_MOOTOOLS or ENGINE_PROTOTYPE)
      */
-    public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY, $extraScripts = false)
+    public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY)
     {
         $this->_chartType = is_null($chartType) ? self::HIGHCHART : $chartType;
         $this->_jsEngine = is_null($jsEngine) ? self::ENGINE_JQUERY : $jsEngine;
-        $this->_extraScripts = $extraScripts;
         //Load default configurations
         $this->setConfigurations();
     }
@@ -147,8 +146,7 @@ class Highchart implements \ArrayAccess
         $result .= is_null($callback) ? '' : ", $callback";
         $result .= ');';
 
-        if ($withScriptTag)
-        {
+        if ($withScriptTag) {
             $result = '<script type="text/javascript">' . $result . '</script>';
         }
 
@@ -200,10 +198,10 @@ class Highchart implements \ArrayAccess
                 break;
         }
 
-        //Include all scripts under the 'extra' key on config file
-        if ($this->_extraScripts === true) {
-            foreach ($this->_confs['extra'] as $scriptInfo) {
-                $scripts[] = $scriptInfo['path'] . $scriptInfo['name'];
+        //Include scripts with keys given to be included via includeExtraScripts
+        if (!empty($this->_extraScripts)) {
+            foreach ($this->_extraScripts as $key) {
+                $scripts[] = $this->_confs['extra'][$key]['path'] . $this->_confs['extra'][$key]['name'];
             }
         }
 
@@ -222,22 +220,34 @@ class Highchart implements \ArrayAccess
             $scripts .= '<script type="text/javascript" src="' . $script . '"></script>';
         }
 
-        if ($return)
-        {
+        if ($return) {
             return $scripts;
         }
-        else
-        {
+        else {
             echo $scripts;
         }
     }
 
     /**
-     * Mark extra javascript scripts to be included on the page
+     * Manually adds an extra script to the extras
+     *
+     * @param string $key      key for the script in extra array
+     * @param string $filepath path for the script file
+     * @param string $filename filename for the script
      */
-    public function includeExtraScripts()
+    public function addExtraScript($key, $filepath, $filename)
     {
-        $this->_extraScripts = true;
+        $this->_confs['extra'][$key] = array('name' => $filename, 'path' => $filepath);
+    }
+
+    /**
+     * Signals which extra scripts are to be included given its keys
+     *
+     * @param array $keys extra scripts keys to be included
+     */
+    public function includeExtraScripts(array $keys = array())
+    {
+        $this->_extraScripts = empty($keys) ? array_keys($this->_confs['extra']) : $keys;
     }
 
     /**
