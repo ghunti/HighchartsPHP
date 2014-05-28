@@ -13,7 +13,7 @@ The recommended way to install HighchartsPHP is through  [`Composer`](http://get
 ```json
 {
     "require": {
-        "ghunti/highcharts-php": "~2.0"
+        "ghunti/highcharts-php": "~3.0"
     }
 }
 ```
