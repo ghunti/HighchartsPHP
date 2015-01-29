@@ -6,58 +6,58 @@
 $jsFiles = array(
     'jQuery' => array(
         'name' => 'jquery.min.js',
-        'path' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/'
+        'path' => '//ajax.googleapis.com/ajax/libs/jquery/1.7.2/'
     ),
 
     'mootools' => array(
         'name' => 'mootools-yui-compressed.js',
-        'path' => 'https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/'
+        'path' => '//ajax.googleapis.com/ajax/libs/mootools/1.4.5/'
     ),
 
     'prototype' => array(
         'name' => 'prototype.js',
-        'path' => 'https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/'
+        'path' => '//ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/'
     ),
 
     'highcharts' => array(
         'name' => 'highcharts.js',
-        'path' => 'http://code.highcharts.com/'
+        'path' => '//code.highcharts.com/'
     ),
 
     'highchartsMootoolsAdapter' => array(
         'name' => 'mootools-adapter.js',
-        'path' => 'http://code.highcharts.com/adapters/'
+        'path' => '//code.highcharts.com/adapters/'
     ),
 
     'highchartsPrototypeAdapter' => array(
         'name' => 'prototype-adapter.js',
-        'path' => 'http://code.highcharts.com/adapters/'
+        'path' => '//code.highcharts.com/adapters/'
     ),
 
     'highstock' => array(
         'name' => 'highstock.js',
-        'path' => 'http://code.highcharts.com/stock/'
+        'path' => '//code.highcharts.com/stock/'
     ),
 
     'highstockMootoolsAdapter' => array(
         'name' => 'mootools-adapter.js',
-        'path' => 'http://code.highcharts.com/stock/adapters/'
+        'path' => '//code.highcharts.com/stock/adapters/'
     ),
 
     'highstockPrototypeAdapter' => array(
         'name' => 'prototype-adapter.js',
-        'path' => 'http://code.highcharts.com/stock/adapters/'
+        'path' => '//code.highcharts.com/stock/adapters/'
     ),
 
     //Extra scripts used by Highcharts 3.0 charts
     'extra' => array(
         'highcharts-more' => array(
             'name' => 'highcharts-more.js',
-            'path' => 'http://code.highcharts.com/'
+            'path' => '//code.highcharts.com/'
         ),
         'exporting' => array(
             'name' => 'exporting.js',
-            'path' => 'http://code.highcharts.com/modules/'
+            'path' => '//code.highcharts.com/modules/'
         ),
     )
 );
