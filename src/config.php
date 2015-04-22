@@ -5,8 +5,8 @@
  */
 $jsFiles = array(
     'jQuery' => array(
-        'name' => 'jquery.min.js',
-        'path' => '//ajax.googleapis.com/ajax/libs/jquery/1.7.2/'
+        'name' => 'jquery-2.1.3.min.js',
+        'path' => '//code.jquery.com/'
     ),
 
     'mootools' => array(
