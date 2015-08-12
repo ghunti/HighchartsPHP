@@ -47,11 +47,15 @@ class HighchartOption implements \ArrayAccess
     {
         if (is_string($value)) {
             //Avoid json-encode errors latter on
-            $this->_value = iconv(
-                mb_detect_encoding($value),
-                "UTF-8",
-                $value
-            );
+            if(function_exists('iconv')){
+                $this->_value = iconv(
+                        mb_detect_encoding($value),
+                        "UTF-8",
+                        $value
+                );
+            } else {// fallback for servers that does not have iconv  
+                $this->_value = mb_convert_encoding($value, "UTF-8", mb_detect_encoding($value));
+            }
         } else if (!is_array($value)) {
             $this->_value = $value;
         } else {
