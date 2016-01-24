@@ -21,6 +21,8 @@ class Highchart implements \ArrayAccess
     const HIGHCHART = 0;
     //A highstock chart
     const HIGHSTOCK = 1;
+    // A Highchart map
+    const HIGHMAPS = 2;
 
     //The js engine to use
     const ENGINE_JQUERY = 10;
@@ -138,6 +140,8 @@ class Highchart implements \ArrayAccess
         $result .= 'new Highcharts.';
         if ($this->_chartType === self::HIGHCHART) {
             $result .= 'Chart(';
+        } elseif ($this->_chartType === self::HIGHMAPS) {
+            $result .= 'Map(';
         } else {
             $result .= 'StockChart(';
         }
@@ -195,6 +199,10 @@ class Highchart implements \ArrayAccess
 
             case self::HIGHSTOCK:
                 $scripts[] = $this->_confs['highstock']['path'] . $this->_confs['highstock']['name'];
+                break;
+
+            case self::HIGHMAPS:
+                $scripts[] = $this->_confs['highmaps']['path'] . $this->_confs['highmaps']['name'];
                 break;
         }
 

@@ -49,6 +49,11 @@ $jsFiles = array(
         'path' => '//code.highcharts.com/stock/adapters/'
     ),
 
+    'highmaps' => array(
+        'name' => 'highmaps.js',
+        'path' => '//code.highcharts.com/maps/'
+    ),
+
     //Extra scripts used by Highcharts 3.0 charts
     'extra' => array(
         'highcharts-more' => array(
