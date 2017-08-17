@@ -9,9 +9,7 @@
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
 
-namespace Ghunti\HighchartsPHP;
-
-class HighchartOption implements \ArrayAccess
+class HighchartOption implements ArrayAccess
 {
     /**
      * An array of HighchartOptions
@@ -32,7 +30,8 @@ class HighchartOption implements \ArrayAccess
      */
     public function __clone()
     {
-        foreach ($this->_childs as $key => $value)
+	$thischilds=$this->_childs;
+        foreach ($thischilds as $key => $value)
         {
             $this->_childs[$key] = clone $value;
         }
@@ -78,7 +77,8 @@ class HighchartOption implements \ArrayAccess
         } elseif (!empty($this->_childs)) {
             //The option value is an array
             $result = array();
-            foreach ($this->_childs as $key => $value) {
+	    $thischilds=$this->_childs;
+            foreach ($thischilds as $key => $value) {
                 $result[$key] = $value->getValue();
             }
             return $result;
@@ -96,12 +96,17 @@ class HighchartOption implements \ArrayAccess
         return $this->offsetGet($offset);
     }
 
+    public static function createNew($value)
+    {
+	return new HighchartOption($value);
+    }
+
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
-            $this->_childs[] = new self($value);
+            $this->_childs[] = self::createNew($value);
         } else {
-            $this->_childs[$offset] = new self($value);
+            $this->_childs[$offset] = self::createNew($value);
         }
         //If the option has at least one child, then it won't
         //have a final value
@@ -125,11 +130,11 @@ class HighchartOption implements \ArrayAccess
         //this method
         unset($this->_value);
         if (is_null($offset)) {
-            $this->_childs[] = new self();
+            $this->_childs[] = self::createNew();
             return end($this->_childs);
         }
         if (!isset($this->_childs[$offset])) {
-            $this->_childs[$offset] = new self();
+            $this->_childs[$offset] = self::createNew();
         }
         return $this->_childs[$offset];
     }

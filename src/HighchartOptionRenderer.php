@@ -9,9 +9,7 @@
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
 
-namespace Ghunti\HighchartsPHP;
-
-use Ghunti\HighchartsPHP\HighchartJsExpr;
+include('HighchartJsExpr.php');
 
 class HighchartOptionRenderer
 {
@@ -23,10 +21,11 @@ class HighchartOptionRenderer
      */
     public static function render($options)
     {
+	
         $jsExpressions = array();
         //Replace any js expression with random strings so we can switch
         //them back after json_encode the options
-        $options = static::_replaceJsExpr($options, $jsExpressions);
+        $options = self::_replaceJsExpr($options, $jsExpressions);
 
         //TODO: Check for encoding errors
         $result = json_encode($options);
@@ -50,13 +49,14 @@ class HighchartOptionRenderer
      */
     private static function _replaceJsExpr($data, &$jsExpressions)
     {
+	
         if (!is_array($data) &&
             !is_object($data)) {
             return $data;
         }
 
         if (is_object($data)) {
-            if ($data instanceof \stdClass) {
+            if ($data instanceof stdClass) {
                 return $data;
             } elseif (!$data instanceof HighchartJsExpr) {
                 $data = $data->getValue();
@@ -70,7 +70,7 @@ class HighchartOptionRenderer
         }
 
         foreach ($data as $key => $value) {
-            $data[$key] = static::_replaceJsExpr($value, $jsExpressions);
+            $data[$key] = self::_replaceJsExpr($value, $jsExpressions);
         }
         return $data;
     }

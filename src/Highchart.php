@@ -9,12 +9,54 @@
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
 
-namespace Ghunti\HighchartsPHP;
+include('HighchartOption.php');
+include('HighchartOptionRenderer.php');
 
-use Ghunti\HighchartsPHP\HighchartOption;
-use Ghunti\HighchartsPHP\HighchartOptionRenderer;
 
-class Highchart implements \ArrayAccess
+if (!function_exists('array_replace_recursive'))
+{
+  function array_replace_recursive($array, $array1)
+  {
+    function recurse($array, $array1)
+    {
+      foreach ($array1 as $key => $value)
+      {
+	// create new key in $array, if it is empty or not an array
+	if (!isset($array[$key]) || (isset($array[$key]) && !is_array($array[$key])))
+	{
+	  $array[$key] = array();
+	}
+  
+	// overwrite the value in the base array
+	if (is_array($value))
+	{
+	  $value = recurse($array[$key], $value);
+	}
+	$array[$key] = $value;
+      }
+      return $array;
+    }
+  
+    // handle the arguments, merge one by one
+    $args = func_get_args();
+    $array = $args[0];
+    if (!is_array($array))
+    {
+      return $array;
+    }
+    for ($i = 1; $i < count($args); $i++)
+    {
+      if (is_array($args[$i]))
+      {
+	$array = recurse($array, $args[$i]);
+      }
+    }
+    return $array;
+  }
+}
+
+
+class Highchart implements ArrayAccess
 {
     //The chart type.
     //A regullar higchart
@@ -71,7 +113,8 @@ class Highchart implements \ArrayAccess
      */
     public function __clone()
     {
-        foreach ($this->_options as $key => $value)
+	$thisoptions=$this->_options;
+        foreach ($thisoptions as $key => $value)
         {
             $this->_options[$key] = clone $value;
         }
@@ -84,7 +127,7 @@ class Highchart implements \ArrayAccess
      * @param int $jsEngine  The javascript library to use
      *                       (One of ENGINE_JQUERY, ENGINE_MOOTOOLS or ENGINE_PROTOTYPE)
      */
-    public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY)
+    public function __construct($chartType = null, $jsEngine = null)
     {
         $this->_chartType = is_null($chartType) ? self::HIGHCHART : $chartType;
         $this->_jsEngine = is_null($jsEngine) ? self::ENGINE_JQUERY : $jsEngine;
@@ -103,7 +146,8 @@ class Highchart implements \ArrayAccess
      */
     public function setConfigurations($configurations = array())
     {
-        include __DIR__ . DIRECTORY_SEPARATOR . "config.php";
+        include "config.php";
+
         $this->_confs = array_replace_recursive($jsFiles, $configurations);
     }
 
@@ -208,7 +252,8 @@ class Highchart implements \ArrayAccess
 
         //Include scripts with keys given to be included via includeExtraScripts
         if (!empty($this->_extraScripts)) {
-            foreach ($this->_extraScripts as $key) {
+	    $thisextrascripts=$this->_extraScripts;
+            foreach ($thisextrascripts as $key) {
                 $scripts[] = $this->_confs['extra'][$key]['path'] . $this->_confs['extra'][$key]['name'];
             }
         }
@@ -224,7 +269,8 @@ class Highchart implements \ArrayAccess
     public function printScripts($return = false)
     {
         $scripts = '';
-        foreach ($this->getScripts() as $script) {
+	$gottenscripts=$this->getScripts();
+        foreach ($gottenscripts as $script) {
             $scripts .= '<script type="text/javascript" src="' . $script . '"></script>';
         }
 
