@@ -127,7 +127,7 @@ class Highchart implements ArrayAccess
      * @param int $jsEngine  The javascript library to use
      *                       (One of ENGINE_JQUERY, ENGINE_MOOTOOLS or ENGINE_PROTOTYPE)
      */
-    public function __construct($chartType = self::HIGHCHART, $jsEngine = self::ENGINE_JQUERY)
+    public function __construct($chartType = null, $jsEngine = null)
     {
         $this->_chartType = is_null($chartType) ? self::HIGHCHART : $chartType;
         $this->_jsEngine = is_null($jsEngine) ? self::ENGINE_JQUERY : $jsEngine;
