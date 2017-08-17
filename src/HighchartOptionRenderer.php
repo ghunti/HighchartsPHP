@@ -9,9 +9,7 @@
 * @author Gonçalo Queirós <mail@goncaloqueiros.net>
 */
 
-namespace Ghunti\HighchartsPHP;
-
-use Ghunti\HighchartsPHP\HighchartJsExpr;
+include('HighchartJsExpr.php');
 
 class HighchartOptionRenderer
 {
@@ -50,13 +48,14 @@ class HighchartOptionRenderer
      */
     private static function _replaceJsExpr($data, &$jsExpressions)
     {
+	
         if (!is_array($data) &&
             !is_object($data)) {
             return $data;
         }
 
         if (is_object($data)) {
-            if ($data instanceof \stdClass) {
+            if ($data instanceof stdClass) {
                 return $data;
             } elseif (!$data instanceof HighchartJsExpr) {
                 $data = $data->getValue();
