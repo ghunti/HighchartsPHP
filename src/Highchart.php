@@ -113,7 +113,8 @@ class Highchart implements ArrayAccess
      */
     public function __clone()
     {
-        foreach ($this->_options as $key => $value)
+	$thisoptions=$this->_options;
+        foreach ($thisoptions as $key => $value)
         {
             $this->_options[$key] = clone $value;
         }
@@ -250,7 +251,8 @@ class Highchart implements ArrayAccess
 
         //Include scripts with keys given to be included via includeExtraScripts
         if (!empty($this->_extraScripts)) {
-            foreach ($this->_extraScripts as $key) {
+	    $thisextrascripts=$this->_extraScripts;
+            foreach ($thisextrascripts as $key) {
                 $scripts[] = $this->_confs['extra'][$key]['path'] . $this->_confs['extra'][$key]['name'];
             }
         }
@@ -266,7 +268,8 @@ class Highchart implements ArrayAccess
     public function printScripts($return = false)
     {
         $scripts = '';
-        foreach ($this->getScripts() as $script) {
+	$gottenscripts=$this->getScripts();
+        foreach ($gottenscripts as $script) {
             $scripts .= '<script type="text/javascript" src="' . $script . '"></script>';
         }
 

@@ -30,7 +30,8 @@ class HighchartOption implements ArrayAccess
      */
     public function __clone()
     {
-        foreach ($this->_childs as $key => $value)
+	$thischilds=$this->_childs;
+        foreach ($thischilds as $key => $value)
         {
             $this->_childs[$key] = clone $value;
         }
@@ -76,7 +77,8 @@ class HighchartOption implements ArrayAccess
         } elseif (!empty($this->_childs)) {
             //The option value is an array
             $result = array();
-            foreach ($this->_childs as $key => $value) {
+	    $thischilds=$this->_childs;
+            foreach ($thischilds as $key => $value) {
                 $result[$key] = $value->getValue();
             }
             return $result;
