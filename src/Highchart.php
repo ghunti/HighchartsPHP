@@ -146,7 +146,8 @@ class Highchart implements ArrayAccess
      */
     public function setConfigurations($configurations = array())
     {
-        include __DIR__ . DIRECTORY_SEPARATOR . "config.php";
+        include "config.php";
+
         $this->_confs = array_replace_recursive($jsFiles, $configurations);
     }
 
