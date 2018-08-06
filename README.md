@@ -206,7 +206,7 @@ $chart->setConfigurations(
 Demos
 -----
 
-All the Highcharts and Highstocks live demos present on http://www.highcharts.com under the demo gallery were reproduced using this library and you can find them on the demos folder or see a live example on http://www.goncaloqueiros.net/demos.php
+All the Highcharts and Highstocks live demos present on http://www.highcharts.com under the demo gallery were reproduced using this library and you can find them on the demos folder or see a live example on http://www.goncaloqueiros.net/highcharts/demos.php
 
 Tests
 -----
