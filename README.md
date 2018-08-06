@@ -37,7 +37,7 @@ $stockChart = new Highchart(Highchart::HIGHSTOCK);
 
 ```php
 //Create a highchart chart with the mootools js engine
-$chartWithMootools = new Highchart(null, Highchart::ENGINE_MOOTOOLS);;
+$chartWithMootools = new Highchart(null, Highchart::ENGINE_MOOTOOLS);
 ```
 
 Now that there's a valid `$chart` object the developer only needs to add elements to it as if it was writing them in JavaScript.
