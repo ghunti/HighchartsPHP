@@ -69,9 +69,12 @@ class HighchartOptionRenderer
             return $magicKey;
         }
 
-        foreach ($data as $key => $value) {
-            $data[$key] = static::_replaceJsExpr($value, $jsExpressions);
+        if(is_array($data)) {
+            foreach ($data as $key => $value) {
+                $data[$key] = static::_replaceJsExpr($value, $jsExpressions);
+            }
         }
+        
         return $data;
     }
 }
