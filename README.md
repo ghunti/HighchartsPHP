@@ -213,6 +213,6 @@ Tests
 You can run the unit tests with the following command:
 ```bash
 $ cd path/to/HighchartsPHP/
-$ composer.phar install
-$ phpunit
+$ composer install
+$ vendor/bin/phpunit
 ```
