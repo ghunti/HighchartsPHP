@@ -4,7 +4,7 @@ HighchartsPHP
 HighchartsPHP is a PHP library that works as a wrapper for the **Highchart js** library (http://www.highcharts.com) and it was built with flexibility and maintainability in mind.
 It isn't a simple port of the JavaScript library to PHP, it was designed in a way that mimics the JavaScript counterpart API, so that the developer only needs to learn one API.
 
-The companion webpage can be found at http://www.goncaloqueiros.net/highcharts.php
+The companion webpage can be found at http://goncaloqueiros.net/highcharts.php
 
 Setup
 -----
