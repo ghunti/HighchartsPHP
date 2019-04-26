@@ -5,7 +5,7 @@
  */
 $jsFiles = array(
     'jQuery' => array(
-        'name' => 'jquery-2.1.3.min.js',
+        'name' => 'jquery-2.2.4.min.js',
         'path' => '//code.jquery.com/'
     ),
 
@@ -54,7 +54,7 @@ $jsFiles = array(
         'path' => '//code.highcharts.com/maps/'
     ),
 
-    //Extra scripts used by Highcharts 3.0 charts
+    //Extra scripts used by Highcharts >= 3.0 charts
     'extra' => array(
         'highcharts-more' => array(
             'name' => 'highcharts-more.js',
