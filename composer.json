@@ -3,7 +3,7 @@
     "type": "library",
     "description": "A php wrapper for highcharts and highstock javascript libraries",
     "keywords": ["highcharts", "highstock", "php", "charts", "javascript"],
-    "homepage": "http://goncaloqueiros.net/highcharts.php",
+    "homepage": "https://goncaloqueiros.net/highcharts.php",
     "license": "GPL-3.0",
     "authors": [
         {
