@@ -13,11 +13,12 @@ The recommended way to install HighchartsPHP is through  [`Composer`](http://get
 ```json
 {
     "require": {
-        "ghunti/highcharts-php": "~3.0"
+        "ghunti/highcharts-php": "^4"
     }
 }
 ```
-Supports PHP 5.3 until PHP 8.0 (inclusive)
+Current package version supports PHP >= 8.0.
+For compatibility with older PHP versions, use the 3.x tag.
 
 Usage
 -----
