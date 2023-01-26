@@ -96,7 +96,7 @@ class HighchartOption implements \ArrayAccess
         return $this->offsetGet($offset);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->_childs[] = new self($value);
@@ -108,17 +108,17 @@ class HighchartOption implements \ArrayAccess
         unset($this->_value);
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->_childs[$offset]);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->_childs[$offset]);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         //Unset the value, because we will always
         //have at least one child at the end of

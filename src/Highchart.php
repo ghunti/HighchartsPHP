@@ -285,22 +285,22 @@ class Highchart implements \ArrayAccess
         return $this->offsetGet($offset);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->_options[$offset] = new HighchartOption($value);
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->_options[$offset]);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->_options[$offset]);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (!isset($this->_options[$offset])) {
             $this->_options[$offset] = new HighchartOption();
