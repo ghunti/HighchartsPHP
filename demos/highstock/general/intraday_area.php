@@ -69,7 +69,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=new-intraday.json&callback=?', function(data) {
+            $.getJSON('new-intraday.json', function(data) {
                 // create the chart
                 <?php echo $chart->render("chart"); ?>;
             });

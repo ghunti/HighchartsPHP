@@ -76,7 +76,7 @@ $chart->series[1]->width = 16;
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function(data) {
+            $.getJSON('usdeur.json', function(data) {
                 // create the chart
                 <?php echo $chart->render("chart"); ?>;
             });

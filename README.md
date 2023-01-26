@@ -17,6 +17,7 @@ The recommended way to install HighchartsPHP is through  [`Composer`](http://get
     }
 }
 ```
+Supports PHP 5.3 until PHP 8.0 (inclusive)
 
 Usage
 -----

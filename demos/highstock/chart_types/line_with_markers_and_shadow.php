@@ -32,7 +32,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
+            $.getJSON('aapl-c.json', function(data) {
                 <?php echo $chart->render("chart"); ?>;
             });
         </script>

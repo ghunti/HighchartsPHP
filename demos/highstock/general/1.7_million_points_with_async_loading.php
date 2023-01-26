@@ -57,7 +57,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/from-sql.php?callback=?', function(data) {
+            $.getJSON('aapl-historical.json', function(data) {
 
                 // Add a null value for the end date
                 data = [].concat(data, [[Date.UTC(2011, 9, 14, 19, 59), null, null, null, null]]);
@@ -75,7 +75,7 @@ $chart->series[] = array(
                     range = e.max - e.min;
                 var chart = $('#container').highcharts();
                 chart.showLoading('Loading data from server...');
-                $.getJSON('http://www.highcharts.com/samples/data/from-sql.php?start='+ Math.round(e.min) +
+                $.getJSON('aapl-historical.json?start='+ Math.round(e.min) +
                         '&end='+ Math.round(e.max) +'&callback=?', function(data) {
 
                     chart.series[0].setData(data);
