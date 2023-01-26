@@ -74,7 +74,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=large-dataset.json&callback=?', function(data) {
+            $.getJSON('large-dataset.json', function(data) {
 
                 // Create a timer
                 var start = + new Date();

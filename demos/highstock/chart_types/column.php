@@ -45,7 +45,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-v.json&callback=?', function(data) {
+            $.getJSON('aapl-v.json', function(data) {
                 <?php echo $chart->render("chart"); ?>;
             });
         </script>

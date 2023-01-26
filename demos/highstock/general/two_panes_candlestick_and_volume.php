@@ -53,7 +53,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function(data) {
+            $.getJSON('aapl-ohlcv.json', function(data) {
 
                 // split the data set into ohlc and volume
                 var ohlc = [],

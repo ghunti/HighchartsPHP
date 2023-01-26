@@ -37,7 +37,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function(data) {
+            $.getJSON('usdeur.json', function(data) {
                 <?php echo $chart->render("chart"); ?>;
             });
         </script>

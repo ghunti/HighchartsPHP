@@ -40,7 +40,7 @@ $chart->series = new HighchartJsExpr("seriesOptions");
             colors = Highcharts.getOptions().colors;
 
             $.each(names, function(i, name) {
-                $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename='+ name.toLowerCase() +'-c.json&callback=?', function(data) {
+                $.getJSON(name.toLowerCase() + '-c.json', function(data) {
 
                     seriesOptions[i] = {
                       name: name,

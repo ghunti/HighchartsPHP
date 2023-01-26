@@ -24,7 +24,7 @@ $chart->series[] = array(
     <body>
         <div id="container"></div>
         <script type="text/javascript">
-            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=range.json&callback=?', function(data) {
+            $.getJSON('range.json', function(data) {
                 $('#container').highcharts('StockChart',<?php echo $chart->renderOptions(); ?>)}
             );
         </script>
