@@ -12,8 +12,9 @@
 namespace Ghunti\HighchartPHP\Tests;
 
 use Ghunti\HighchartsPHP\HighchartOption;
+use PHPUnit\Framework\TestCase;
 
-class HighchartOptionTest extends \PHPUnit_Framework_TestCase
+class HighchartOptionTest extends TestCase
 {
     public function testOptionCreation()
     {

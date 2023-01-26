@@ -12,8 +12,9 @@
 namespace Ghunti\HighchartPHP\Tests;
 
 use Ghunti\HighchartsPHP\Highchart;
+use PHPUnit\Framework\TestCase;
 
-class HighchartTest extends \PHPUnit_Framework_TestCase
+class HighchartTest extends TestCase
 {
     public function testRenderOptionsEncoding()
     {
