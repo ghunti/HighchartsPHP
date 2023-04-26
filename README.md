@@ -218,3 +218,7 @@ $ cd path/to/HighchartsPHP/
 $ composer install
 $ vendor/bin/phpunit
 ```
+
+License
+-----
+The HighchartsPHP package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
